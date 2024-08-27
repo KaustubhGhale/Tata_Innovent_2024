@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
-from models.model1 import detect_dents  # Import your model functions
-from models.model2 import detect_scratches
+'''from models.model1 import detect_dents
+from models.model2 import detect_scratches'''
 
 app = Flask(__name__)
 
@@ -8,7 +8,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/process', methods=['POST'])
+'''@app.route('/process', methods=['POST'])
 def process_file():
     file = request.files['file']
     model = request.form['model']
@@ -29,6 +29,6 @@ def process_file():
         'generatedImage': repaired_image_path,
         'helpline': "Call 1800-XYZ-CARS for assistance."
     })
-
+'''
 if __name__ == '__main__':
     app.run(debug=True)
