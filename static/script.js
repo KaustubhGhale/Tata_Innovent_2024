@@ -22,7 +22,7 @@ document.getElementById('submit-button').addEventListener('click', function() {
         document.getElementById('results').style.display = 'block';
         document.getElementById('ai-response').textContent = data.aiResponse;
         document.getElementById('helpline').textContent = data.helpline;
-        document.getElementById('generated-image').src = data.generatedImage;
+        document.getElementById('generated-image').src = data.image_url;
     })
     .catch(error => console.error('Error:', error));
 });
