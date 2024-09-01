@@ -15,3 +15,9 @@ source venv/bin/activate
 
 # Install dependencies
 pip install Flask tensorflow opencv-python pillow
+
+#Visit pytorch and download the libraries according to specifications
+https://pytorch.org/get-started/locally/
+
+#Download ultralytics libraries
+pip install ultralytics
