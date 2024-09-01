@@ -21,3 +21,7 @@ https://pytorch.org/get-started/locally/
 
 # Download ultralytics libraries
 pip install ultralytics
+
+# Running the App
+Note: Change the filepath for model before running the app
+python app.py
