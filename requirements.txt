@@ -1,8 +1,7 @@
-flask
-cv2
+Flask
+opencv-python
 numpy
 matplotlib
-io
-pillow
+Pillow
 torch==2.4.1 --find-links https://download.pytorch.org/whl/cpu
 ultralytics
