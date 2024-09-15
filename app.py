@@ -3,16 +3,19 @@ from ultralytics import YOLO
 import cv2
 import numpy as np
 import os
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+import io
+from PIL import Image
 
-model1 = YOLO("/home/prakhar/Desktop/Tata Competition/Tata_Innovent_2024/models/best.pt")
-model2 = ""
-model = ""
+model1 = YOLO(r"/home/prakhar/Desktop/Tata Competition/Tata_Innovent_2024/models/Models/yolo_v8/Medium/weights/best.pt")
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
 PROCESSED_FOLDER = 'static/processed'
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(PROCESSED_FOLDER, exist_ok=True)
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -20,15 +23,11 @@ def index():
 @app.route('/process', methods=['POST'])
 def process_file():
     if 'file' not in request.files:
-        print("Error: No image file found in the request")
         return jsonify({'error': 'No image file found in the request'}), 400
     
     file = request.files['file']
-    print("File received:", file)
+    model_choice = request.form.get('model')
     
-    model_choice = request.form.get('model')  # Get the model choice from the form
-    print("Model selected:", model_choice)
-
     if model_choice == "model1":
         model = model1
     else:
@@ -42,19 +41,25 @@ def process_file():
     if img is None:
         return jsonify({'error': 'Invalid image file'}), 400
 
-    # Process the image with the model
-    results = model(img)
-    predictions = results[0].boxes.data.tolist()
+    # YOLO Prediction
+    results = model.predict(img, conf=0.2)
+    img_with_boxes = results[0].plot()  # Matplotlib array
 
-    # Draw bounding boxes on the image
-    for pred in predictions:
-        x1, y1, x2, y2, conf, cls = pred
-        label = f"{model.names[int(cls)]} {conf:.2f}"
-        cv2.rectangle(img, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
-        cv2.putText(img, label, (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+    # Convert Matplotlib image to send via Flask
+    fig, ax = plt.subplots(figsize=(12, 12))
+    ax.imshow(img_with_boxes)
+    ax.axis('off')
+    canvas = FigureCanvas(fig)
+    img_io = io.BytesIO()
+    canvas.print_png(img_io)
+    img_io.seek(0)
 
+    # Convert the image to RGB (to avoid RGBA error when saving as JPEG)
+    img_pil = Image.open(img_io).convert('RGB')
+
+    # Save the processed image in the folder
     processed_filepath = os.path.join(PROCESSED_FOLDER, filename)
-    cv2.imwrite(processed_filepath, img)
+    img_pil.save(processed_filepath, format='JPEG')  # Save as JPEG
 
     return jsonify({
         'aiResponse': 'Prediction successful',
