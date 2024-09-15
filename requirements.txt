@@ -1,0 +1,7 @@
+flask
+ultralytics
+cv2
+numpy
+matplotlib
+io
+pillow
