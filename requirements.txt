@@ -1,8 +1,8 @@
 flask
-ultralytics
 cv2
 numpy
 matplotlib
 io
 pillow
 torch==2.4.1 --find-links https://download.pytorch.org/whl/cpu
+ultralytics
