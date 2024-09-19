@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Repair Advisor (Dark Mode)</title>
+    <title>DefectVision AI (Dark Mode)</title>
     <link rel="stylesheet" href="static/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Car Repair Advisor</h1>
+        <h1>DefectVision AI</h1>
         <form id="upload-form">
             <label for="file-upload">Upload Car Image:</label>
             <input type="file" id="file-upload" accept="image/*">
             <label for="model-select">Choose a Detection Model:</label>
             <select id="model-select">
-                <option value="model1">Model 1: Yolov8</option>
-                <option value="model2">Model 2: DetectronV2</option>
-                <option value="model3">Model 3: SAM</option>
+                <option value="model1">Model 1: Yolov8 Medium</option>
+                <option value="model2">Model 2: Yolov8 Mini</option>
+                <option value="model3">Model 3: Detectron</option>
             </select>
             <button type="button" id="submit-button">Submit for Analysis</button>
         </form>
