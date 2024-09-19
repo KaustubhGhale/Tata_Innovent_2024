@@ -8,7 +8,8 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import io
 from PIL import Image
 
-model1 = YOLO(r"/home/prakhar/Desktop/Tata Competition/Tata_Innovent_2024/models/Models/yolo_v8/Medium/weights/best.pt")
+model1 = YOLO(r"E:\repos\Tata_Innovent_2024-main\models\Yolov8\Medium\weights\best.pt")
+model2 = YOLO(r"E:\repos\Tata_Innovent_2024-main\models\Yolov8\Mini\weights\best.pt")
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
 PROCESSED_FOLDER = 'static/processed'
@@ -30,6 +31,8 @@ def process_file():
     
     if model_choice == "model1":
         model = model1
+    elif model_choice == "model2":
+        model=model2
     else:
         return jsonify({'error': 'Invalid model choice'}), 400
 
