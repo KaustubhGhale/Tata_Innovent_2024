@@ -1,4 +1,4 @@
-1) conda create env --name sam python=3.8
+1) conda create -n sam python=3.8
 
 2) conda activate
 
