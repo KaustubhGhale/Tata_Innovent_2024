@@ -3,34 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProfitGPT - Car Repair Advisor</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>DefectVision AI (Dark Mode)</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Car Repair Advisor</h1>
+        <h1>DefectVision AI</h1>
         <form id="upload-form">
-            <label for="file-upload">Upload Image or Video:</label>
-            <input type="file" id="file-upload" accept="image/*,video/*">
-            <br>
-            <label for="model-select">Choose a Model:</label>
+            <label for="file-upload">Upload Car Image:</label>
+            <input type="file" id="file-upload" accept="image/*">
+            <label for="model-select">Choose a Detection Model:</label>
             <select id="model-select">
-                <option value="model1">Model 1: Car Dents Detection</option>
-                <option value="model2">Model 2: Paint Scratches Detection</option>
-                <!-- Add more models as necessary -->
+                <option value="model1">Model 1: Yolov8 Medium</option>
+		<option value="model1">Model 2: Yolov8 Mini</option>
+		<option value="model1">Model 3: Yolov8 Large</option>
+		<option value="model1">Model 4: Yolov8 Large XL</option>
+                <option value="model2">Model 5: DetectronV2 Medium</option>
+                <option value="model2">Model 6: DetectronV2 Mini</option>
             </select>
-            <br>
-            <button type="button" id="submit-button">Submit</button>
+            <button type="button" id="submit-button">Submit for Analysis</button>
         </form>
+
         <div id="results">
             <h2>Analysis Results</h2>
             <p id="ai-response"></p>
-            <h3>Suggested Repairs</h3>
-            <img id="generated-image" alt="Repaired Car Preview">
+            <h3>Processed Image</h3>
+            <img id="generated-image" alt="Processed Image">
             <h3>Servicing Helpline</h3>
             <p id="helpline"></p>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="static/script.js"></script>
 </body>
 </html>
