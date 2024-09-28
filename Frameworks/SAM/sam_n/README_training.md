@@ -60,15 +60,6 @@ The following hyperparameters are set in the script:
 
 ## Usage
 
-1. Clone the repository.
-2. Set the paths to your dataset and model saving directory.
-3. Ensure that the necessary libraries are installed.
-4. Run the script using the following command:
-
-```bash
-python train_sam.py
-```
-
 ### Example Paths
 
 Set your dataset and model paths in the script:
