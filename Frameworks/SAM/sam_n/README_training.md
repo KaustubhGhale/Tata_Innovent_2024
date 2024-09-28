@@ -6,18 +6,6 @@ Here’s a `README.md` file for the provided script:
 
 This repository contains a training pipeline for a Segment Anything Model (SAM) using a dataset of images and masks. The SAM model is adapted from Facebook's pre-trained SAM model, and is fine-tuned on a custom dataset for semantic segmentation tasks.
 
-## Table of Contents
-
-1. [Requirements](#requirements)
-2. [Dataset Structure](#dataset-structure)
-3. [Hyperparameters](#hyperparameters)
-4. [Usage](#usage)
-5. [Model Architecture](#model-architecture)
-6. [Training Process](#training-process)
-7. [Saving the Model](#saving-the-model)
-8. [Loss Functions](#loss-functions)
-9. [Visualization](#visualization)
-10. [References](#references)
 
 ---
 
