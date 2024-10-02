@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template, send_from_directory
+from werkzeug.utils import secure_filename
 from ultralytics import YOLO
 import cv2
 import numpy as np
@@ -18,11 +19,15 @@ from detectron2.data import MetadataCatalog, DatasetCatalog
 from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 from detectron2.data import build_detection_test_loader
 
-model1 = YOLO(r"D:\HaxS\Tata_Innovent_2024\models\yolo_v8\Medium\weights\best.pt")
-model2 = YOLO(r"D:\HaxS\Tata_Innovent_2024\models\yolo_v8\Mini\weights\best.pt")
-model3 = YOLO(r"D:\HaxS\Tata_Innovent_2024\models\yolo_v8\Large\weights\best.pt")
-model4 = YOLO(r"D:\HaxS\Tata_Innovent_2024\models\yolo_v8\Large XL\weights\best.pt")
+model1 = YOLO(r"/home/prakhar/Desktop/Tata Competition/Tata_Innovent_2024/models/Yolov8/Medium/weights/best.pt")
+model2 = YOLO(r"/home/prakhar/Desktop/Tata Competition/Tata_Innovent_2024/models/Yolov8/Mini/weights/best.pt")
+model3 = YOLO(r"/home/prakhar/Desktop/Tata Competition/Tata_Innovent_2024/models/Yolov8/Large/weights/best.pt")
+model4 = YOLO(r"/home/prakhar/Desktop/Tata Competition/Tata_Innovent_2024/models/Yolov8/Large XL/weights/best.pt")
+model5 = YOLO(r"/home/prakhar/Desktop/Tata Competition/Tata_Innovent_2024/models/Yolov8/Large XL/weights/best.pt")
+model6 = YOLO(r"/home/prakhar/Desktop/Tata Competition/Tata_Innovent_2024/models/Yolov8/Large XL/weights/best.pt")
 
+
+"""
 from detectron2.data.datasets import register_coco_instances
 register_coco_instances("my_dataset_train", {}, r"D:/HaxS/Dataset/Car dentss.v1i.coco-segmentation/train/_annotations.coco.json", r"D:/HaxS/Dataset/Car dentss.v1i.coco-segmentation/train")
 register_coco_instances("my_dataset_val", {}, r"D:/HaxS/Dataset/Car dentss.v1i.coco-segmentation/valid/_annotations.coco.json", r"D:/HaxS/Dataset/Car dentss.v1i.coco-segmentation/valid")
@@ -35,7 +40,7 @@ val_dataset_dicts = DatasetCatalog.get("my_dataset_val")
 from detectron2.engine import DefaultTrainer
 
 cfg = get_cfg()
-cfg.OUTPUT_DIR = "D:\HaxS\Tata_Innovent_2024\models\Detectron2\Medium"
+cfg.OUTPUT_DIR = "D:\\HaxS\\Tata_Innovent_2024\\models\\Detectron2\\Medium"
 cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml"))
 cfg.DATASETS.TRAIN = ("my_dataset_train",)
 
@@ -44,14 +49,15 @@ cfg.MODEL.ROI_HEADS.NUM_CLASSES = 3  # We have 4 classes.
 cfg.MODEL.WEIGHTS=os.path.join(cfg.OUTPUT_DIR,"model_final.pth")
 cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.6 # Custom
 predictor = DefaultPredictor(cfg)
-'''
-cfg1.merge_from_file(r"D:\HaxS\Tata_Innovent_2024\models\Detectron2\Mini\config.yaml")  # Path to your .yaml config file
-cfg1.MODEL.WEIGHTS = ("D:\HaxS\Tata_Innovent_2024\models\Detectron2\Mini\model_final.pth")  # Path to your fine-tuned model weights
+
+cfg1.merge_from_file(r"D:\\HaxS\\Tata_Innovent_2024\\models\\Detectron2\\Mini\\config.yaml")  # Path to your .yaml config file
+cfg1.MODEL.WEIGHTS = ("D:\\HaxS\\Tata_Innovent_2024\\models\\Detectron2\\Mini\\model_final.pth")  # Path to your fine-tuned model weights
 cfg1.MODEL.ROI_HEADS.NUM_CLASSES = 1  # Set this to the number of classes you have
 model6 = DefaultTrainer(cfg1)
 model6.resume_or_load(resume=False)  # Load the model weights
-'''
+"""
 app = Flask(__name__)
+
 UPLOAD_FOLDER = 'static/uploads'
 PROCESSED_FOLDER = 'static/processed'
 
@@ -85,7 +91,7 @@ def process_file():
     else:
         return jsonify({'error': 'Invalid model choice'}), 400
 
-    filename = file.filename
+    filename = secure_filename(file.filename)
     filepath = os.path.join(UPLOAD_FOLDER, filename)
     file.save(filepath)
 
